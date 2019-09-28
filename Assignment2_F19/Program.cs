@@ -68,19 +68,20 @@ namespace Assignment2_F19
 
 
 
-            int[] arr = { -4, -1, 0, 3, 10 };
+            int[] arr = {-7,-3,2,3,11 };
 
             int[] sortedSquares = SortedSquares(arr);
 
-            Console.WriteLine("Squares of the array in sorted order is:");
+            Console.Write("Squares of the array in sorted order is:");
+            
 
             DisplayArray(sortedSquares);
 
-            Console.Write("\n");
+            Console.WriteLine("\n");
 
 
 
-            string s = "abca";
+            string s = "abcbea";
 
             if (ValidPalindrome(s))
             {
@@ -167,8 +168,8 @@ namespace Assignment2_F19
                     // This will test to true if the match in the Binary Search is found
                     if (get_middle == target)
                     {
-                        Console.WriteLine("");
-                        Console.WriteLine(mid);
+                        //Console.WriteLine("");
+                        //Console.WriteLine(mid);
                         // Break out of the loop once the match for the search is found
                         break;
                     }
@@ -398,54 +399,59 @@ namespace Assignment2_F19
         public static int[] SortedSquares(int[] A)
 
         {
-
+            int[] B = new int[A.Length];
             try
 
             {
 
-                // Write your code here
-
+                for(int i=0;i<A.Length;i++)
+                {
+                    B[i] = Convert.ToInt32(Math.Pow(Convert.ToDouble(A[i]),Convert.ToDouble(2)));
+                   
+                }
+                Array.Sort(B);               
             }
-
             catch
-
             {
 
                 Console.WriteLine("Exception occured while computing SortedSquares()");
 
             }
-
-
-
-            return new int[] { };
-
+            return B;
         }
 
 
 
         public static bool ValidPalindrome(string s)
-
         {
-
             try
-
             {
-
-                // Write your code here
-
+                int low = 0;
+                int high = s.Length - 1;
+                int count = 0;
+                while(low<high)
+                {
+                    if(s[low]==s[high])
+                    {                       
+                        low++;
+                        high--;
+                    }
+                    else
+                    {
+                        high--;
+                        count++;
+                        if (count > 1)
+                            return false;
+                    }
+                }
             }
-
             catch
-
             {
 
                 Console.WriteLine("Exception occured while computing ValidPalindrome()");
 
             }
-
-
-
-            return false;
+            return true;
 
         }
 
