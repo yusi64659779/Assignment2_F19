@@ -60,7 +60,7 @@ namespace Assignment2_F19
 
 
 
-            int[,] intervals = { { 0, 30 }, { 5, 10 }, { 15, 20 } };
+            int[,] intervals = {  { 5, 10 }, { 0, 30 }, { 15, 20 }, { 35, 50 }, { 14, 35 } };
 
             int minMeetingRooms = MinMeetingRooms(intervals);
 
@@ -371,13 +371,32 @@ namespace Assignment2_F19
         public static int MinMeetingRooms(int[,] intervals)
 
         {
-
+            int row = intervals.GetLength(0);
+            int col = intervals.GetLength(1);
+            int n = 1;
             try
-
             {
-
-                // Write your code here
-
+                for(int i=0;i<row-1;i++)
+                {
+                    for (int j = 1; j < row; j++)
+                    {
+                        if(intervals[i,0]>intervals[j,0])
+                        {
+                            for(int k=0;k<col;k++)
+                            {
+                                var t = intervals[i, k];
+                                intervals[i, k] = intervals[j, k];
+                                intervals[j, k] = t;
+                                Console.Write(" " + intervals[i, k]);
+                            }
+                        }
+                    }
+                }
+                for(int i=0;i<row;i++)
+                {
+                    if (intervals[i, 1] > intervals[i + 1, 0])
+                        n++;
+                }
             }
 
             catch
@@ -390,7 +409,7 @@ namespace Assignment2_F19
 
 
 
-            return 0;
+            return n;
 
         }
 
