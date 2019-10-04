@@ -20,7 +20,7 @@ namespace Assignment2_F19
 
 
 
-            int[] nums1 = {1,2,2,3,3};
+            int[] nums1 = {1,2,2,3};
 
             int[] nums2 = {2,3,1,3,4};
 
@@ -34,7 +34,8 @@ namespace Assignment2_F19
 
 
 
-            int[] A = {  9, 9, 8, 8,10};
+            //int[] A = { 1,8,1,5,3,3,6,6,6,9,7,7,10,10,10,11,11};
+            int[] A = {1,1,10,10,-1,-2,-2,0};
 
             Console.WriteLine("Largest integer occuring once = {0}\n", LargestUniqueNumber(A));
 
@@ -253,30 +254,46 @@ namespace Assignment2_F19
         public static int LargestUniqueNumber(int[] A)
 
         {
-            int t=-1;
+           
             try
             {
+                int t = -1;
+                int count = 1;
                 Array.Sort(A);
-                int i = A.Length - 1;
-                for (; i > 0; i--)
-                {
-                    if (A[i] == A[i-1])
+                int i=A.Length-1;
+                while (i>=1 && i < A.Length)
+                {                   
+                    if (A[i] == A[i - 1])
                     {
+                        count++;
                         i--;
                     }
-                    else
+                    else if (count > 1)
+                    {
+                        count = 1;
+                        i--;
+                    }
+                    else 
                     {
                         t = A[i];
                         break;
-                    }   
+                    }
                 }
+                if(i==0 && count==1)
+                {
+                    t = A[i];
+                }
+                if(i==0 && count>1)
+                {
+                    t = -1;
+                }
+                return t;
             }
             catch
             {
                 Console.WriteLine("Exception occured while computing LargestUniqueNumber()");
             }
-            return t;
-
+           return new int { };
         }
 
 
