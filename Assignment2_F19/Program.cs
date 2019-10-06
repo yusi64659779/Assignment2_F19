@@ -215,7 +215,7 @@ namespace Assignment2_F19
             List<int> intersec = new List<int>();
             try
             {
-                Dictionary<int, int> mydictionary1 = new Dictionary<int, int>();               
+                Dictionary<int, int> mydictionary1 = new Dictionary<int, int>();
                 foreach (int num in nums1)
                 {
                     if (!mydictionary1.ContainsKey(num))
@@ -236,6 +236,23 @@ namespace Assignment2_F19
                     }
                 }
 
+                Dictionary<int, int> mydictionary2 = new Dictionary<int, int>();
+                int i = 0;
+                foreach(int num1 in nums1)
+                {
+                    mydictionary2.Add(num1, i);
+                    i++;
+                }
+                List<int> commonnum = new List<int>();
+                foreach(int num2 in nums2)
+                {
+                    if(mydictionary2.ContainsKey(num2) && mydictionary2[num2]>0)
+                    {
+                        commonnum.Add(num2);
+                        mydictionary2[num2]--;                       
+                    }
+                }
+                return commonnum.ToArray();
             }
 
             catch
@@ -245,9 +262,9 @@ namespace Assignment2_F19
                 Console.WriteLine("Exception occured while computing Intersect()");
 
             }
-
             return intersec.ToArray();
-
+           
+            
            
             
 
@@ -346,13 +363,11 @@ namespace Assignment2_F19
                 }
 
                 Dictionary<char, int> Mydictionary = new Dictionary<char, int>();
-                List<int> CommonKey = new List<int>();
                 int i = 0;
                 foreach (char l1 in keyboard)
                 {
                     Mydictionary.Add(l1, i);
                     i++;
-
                 }
                 char start = keyboard[0];
                 int x;
