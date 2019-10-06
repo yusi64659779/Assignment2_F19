@@ -12,7 +12,7 @@ namespace Assignment2_F19
         public static void Main(string[] args)
         {
 
-            int target = 5;
+            int target = 3;
 
             int[] nums = { 1, 3, 5, 6 };
 
@@ -34,16 +34,16 @@ namespace Assignment2_F19
 
 
 
-            //int[] A = { 1,8,1,5,3,3,6,6,6,9,7,7,10,10,10,11,11};
-            int[] A = {1,1,10,10,-1,-2,-2,0};
+            int[] A = { 1,8,1,5,3,3,6,6,6,9,7,7,10,10,10,11,12,12,12};
+            //int[] A = {1,1,10,10,-1,-2,-2,0};
 
             Console.WriteLine("Largest integer occuring once = {0}\n", LargestUniqueNumber(A));
 
 
 
-            string keyboard = "pqrstuvwxyzabcdefghijklmno";
+            string keyboard = "abcdefghijklmnopqrstuvwxyz";
 
-            string word = "munja";
+            string word = "mds";
 
             Console.WriteLine("Time taken to type with one finger = {0}\n", CalculateTime(keyboard, word));
 
@@ -147,18 +147,19 @@ namespace Assignment2_F19
         {
             Array.Sort(nums);
             // get_middle will be used to get the element in the middle of the array. Initialize to 0 for now.
-            int get_middle = 0;
-            // This is the lower element of the array. Initialize to 0 for now. 
-            int low = 0;
-            // This is the upper element of the array
-            int high = (nums.Length) - 1;
-            // This is the middle of the array. mid is rounded down automatically if (low + high) is not an even number
-            int mid;
-            // This variable is used to track where the middle is. You will later in this code how this prevents an infinite loop in the Binary Search
-            int track_middle = 0;
-            // Here is the Binary Search Algorithm
+            
             try
             {
+                int get_middle = 0;
+                // This is the lower element of the array. Initialize to 0 for now. 
+                int low = 0;
+                // This is the upper element of the array
+                int high = (nums.Length) - 1;
+                // This is the middle of the array. mid is rounded down automatically if (low + high) is not an even number
+                int mid;
+                // This variable is used to track where the middle is. You will later in this code how this prevents an infinite loop in the Binary Search
+                int track_middle = 0;
+                // Here is the Binary Search Algorithm
                 while (low <= high)
                 {
                     // Reset mid each time the while iterates
@@ -190,16 +191,19 @@ namespace Assignment2_F19
                         low = mid + 1;
                     }
                 }
+                
                 if (low > high)
                 {
-                    Console.WriteLine(low);
+                    return low;
                 }
+                return low;
             }
+            
             catch
             {
                 Console.WriteLine("Exception occured while computing SearchInsert()");
             }
-            return low;
+            return 0;
 
         }
 
@@ -257,7 +261,7 @@ namespace Assignment2_F19
            
             try
             {
-                int t = -1;
+                int t = 0;
                 int count = 1;
                 Array.Sort(A);
                 int i=A.Length-1;
@@ -340,6 +344,26 @@ namespace Assignment2_F19
                     }
                     r = r + Math.Abs(a - b);
                 }
+
+                Dictionary<char, int> Mydictionary = new Dictionary<char, int>();
+                List<int> CommonKey = new List<int>();
+                int i = 0;
+                foreach (char l1 in keyboard)
+                {
+                    Mydictionary.Add(l1, i);
+                    i++;
+
+                }
+                char start = keyboard[0];
+                int x;
+                int sum = 0;
+                foreach (char l2 in word)
+                {
+                    x = Mydictionary[l2] - Mydictionary[start];
+                    start = l2;
+                    sum = sum + Math.Abs(x);
+                }
+                Console.WriteLine(sum);
             }
             catch
             {
